@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todo</title>
+    <style>
+        #text{
+        font-weight: bold;
+        text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+<h1 style="color:red;">My Todo List</h1>
+<!--<ul>-->
+    <!--<li>temporary todo item A</li>-->
+    <!--<li>temporary todo item B</li>-->
+
+<!--</ul>-->
+<ul>
+    {% for todo_item in all_items %}
+    <li id="text" style="color:blue;">{{ todo_item.content}}&nbsp&nbsp
+    <form action="/deleteTodo/{{todo_item.id}}/"
+          style="display: inline;"
+          method="post">{% csrf_token %}
+    <input type="submit" value="Delete"/>
+</form>
+    </li>
+    {% endfor %}
+</ul>
+<form action="/addTodo/" method="post">{% csrf_token %}
+    <input type="text" name="content"/>
+    <input type="submit" value="Add"/>
+</form>
+</body>
+</html>
